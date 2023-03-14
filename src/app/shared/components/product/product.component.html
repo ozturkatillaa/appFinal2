@@ -1,0 +1,57 @@
+<dx-data-grid
+  #grid
+  id="gridContainer"
+  [dataSource]="dataSource"
+  keyExpr="ID"
+  [allowColumnReordering]="true"
+  [showBorders]="true"
+  [selectedRowKeys]="[]"
+  [hoverStateEnabled]="true"
+  [(selectedRowKeys)]="selectedRows"
+  (onSelectionChanged)="selectionChangedHandler()"
+  (onSaved)="logEvent('Saved')"
+>
+<dxo-selection mode="multiple"></dxo-selection>
+  <dxo-paging [enabled]="true"></dxo-paging>
+  <dxo-editing
+    mode="row"
+    [allowUpdating]="true"
+    [allowDeleting]="true"
+    [allowAdding]="true"
+  >
+  </dxo-editing>
+
+  <dxi-column dataField="ProductName" caption="Title"></dxi-column>
+  <dxi-column dataField="Stock"></dxi-column>
+  <dxi-column dataField="Price" ></dxi-column>
+  <dxi-column dataField="CurrencyType" [width]="130"></dxi-column>
+
+</dx-data-grid>
+<div class="selected-data">
+  <span class="caption">Selected Products:</span>
+  <span>
+    {{
+      grid.selectedRowKeys.length
+        ? (grid.instance.getSelectedRowsData() | stringifyProducts)
+        : "Any Product has been selected"
+    }}
+  </span>
+</div>
+
+<div id="events">
+  <div>
+    <div class="caption"> Fired events </div>
+    <dx-button id="clear" text="Clear" (onClick)="clearEvents()"></dx-button>
+  </div>
+  <ul>
+    <li *ngFor="let event of events">{{ event }}</li>
+  </ul>
+</div>
+
+
+<!-- <div id="productInfo" *ngIf="grid.selectedRowKeys.length">
+  <p class="productInfo">{{
+    grid.instance.getSelectedRowsData()[0].ProductName
+  }}</p>
+</div> -->
+

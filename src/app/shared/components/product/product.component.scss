@@ -1,0 +1,76 @@
+::ng-deep #productInfo {
+  height: 100px;
+  float: left;
+  padding: 20px;
+}
+
+::ng-deep #productInfo {
+  padding-top: 20px;
+  text-align: justify;
+}
+
+::ng-deep .dark #productInfo  {
+  color: rgb(181, 181, 181);
+}
+
+::ng-deep #grid {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+::ng-deep .selected-data {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: rgba(191, 191, 191, 0.15);
+}
+
+::ng-deep .selected-data .caption {
+  font-weight: bold;
+  font-size: 115%;
+  margin-right: 4px;
+}
+
+::ng-deep #events {
+  background-color: rgba(191, 191, 191, 0.15);
+  padding: 20px;
+  margin-top: 20px;
+}
+
+::ng-deep #events > div {
+  padding-bottom: 5px;
+}
+
+::ng-deep #events > div::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+::ng-deep #events #clear {
+  float: right;
+}
+
+::ng-deep #events .caption {
+  float: left;
+  font-weight: bold;
+  font-size: 115%;
+  line-height: 115%;
+  padding-top: 7px;
+}
+
+::ng-deep #events ul {
+  list-style: none;
+  max-height: 100px;
+  overflow: auto;
+  margin: 0;
+}
+
+::ng-deep #events ul li {
+  padding: 7px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+::ng-deep #events ul li:last-child {
+  border-bottom: none;
+}
