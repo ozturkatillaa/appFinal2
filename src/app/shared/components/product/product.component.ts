@@ -1,4 +1,5 @@
 import { Component, Pipe, PipeTransform } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Product, ProductService, } from '../../services/product.service';
 
 @Component({
@@ -7,56 +8,47 @@ import { Product, ProductService, } from '../../services/product.service';
   styleUrls: ['./product.component.scss'],
   providers: [ProductService]
 })
+
 export class ProductComponent {
   dataSource: Product[];
-
-
-  selectedRows: number[] = [];
-
-  selectionChangedBySelectbox: boolean;
+  product: any;
+  stock: any;
+  price: any;
+  currencyType: any;
+  jsonValue:any;
   currency: any;
-  events: Array<String>= [];
   productName:Product;
+  selectedProduct:Product[];
+  formGroup: FormGroup;
+  formData: any = {};
 
+  constructor(private service: ProductService, private fb: FormBuilder) {
+    this.formGroup = this.fb.group({
+      productName: ['', Validators.required],
+      stock: [''],
+      price: [''],
+      currencyType: ['']
+    })
 
-  constructor(private service: ProductService) {
     this.dataSource = service.getProducts();
 
   }
 
-  // logEvent(productName : string) {
-  //   if(this.productName.ProductName == productName)
-  //   {
-  //     this.events.unshift(productName)
-  //   }
-  //   else
-  //   {
-  //      false;
-  //   }
-  // }
+  addProduct(){
+    debugger
+    let newData = new Product();
 
-  logEvent(eventName:any) {
-    this.events.unshift(eventName);
+    newData.ID = Math.floor(Math.random() * 85) + 16;
+    newData.ProductName = this.product;
+    newData.Stock = this.stock;
+    newData.Price = this.price;
+    newData.CurrencyType = this.currencyType;
+
+    this.dataSource.push(newData);
   }
 
-  clearEvents() {
-    this.events = [];
-  }
-
-
-  selectionChangedHandler() {
-    if (!this.selectionChangedBySelectbox) {
-      this.currency = null;
-    }
-
-    this.selectionChangedBySelectbox = false;
+  jsonData(){
+    this.jsonValue = JSON.stringify(this.dataSource);
   }
 }
 
-@Pipe({ name: 'stringifyProducts' })
-export class stringifyProductsPipe implements PipeTransform {
-  transform(products: Product[]) {
-    return products.map((product) => `${product.ProductName} ${product.Price}`).join(', ');
-  }
-
-}

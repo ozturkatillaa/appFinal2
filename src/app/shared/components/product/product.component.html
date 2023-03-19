@@ -1,57 +1,52 @@
-<dx-data-grid
-  #grid
-  id="gridContainer"
-  [dataSource]="dataSource"
-  keyExpr="ID"
-  [allowColumnReordering]="true"
-  [showBorders]="true"
-  [selectedRowKeys]="[]"
-  [hoverStateEnabled]="true"
-  [(selectedRowKeys)]="selectedRows"
-  (onSelectionChanged)="selectionChangedHandler()"
-  (onSaved)="logEvent('Saved')"
->
-<dxo-selection mode="multiple"></dxo-selection>
-  <dxo-paging [enabled]="true"></dxo-paging>
-  <dxo-editing
-    mode="row"
-    [allowUpdating]="true"
-    [allowDeleting]="true"
-    [allowAdding]="true"
-  >
-  </dxo-editing>
+<dx-button mat-flat-button type="default" stylingMode="contained" (onClick)="jsonData()" icon="save">
+</dx-button>
 
+<div class="selected-data">
+  <span class="caption">Json Value:</span>
+  <span>{{jsonValue}}</span>
+</div>
+<p class="text-with-space"></p>
+<dx-data-grid #grid id="gridContainer" [dataSource]="dataSource" keyExpr="ID" [allowColumnReordering]="true"
+  [showBorders]="true"  [hoverStateEnabled]="true">
+
+  <dxo-paging [enabled]="true"></dxo-paging>
+  <dxo-editing mode="row" [allowUpdating]="true" [allowDeleting]="true">
+  </dxo-editing>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
   <dxi-column dataField="ProductName" caption="Title"></dxi-column>
   <dxi-column dataField="Stock"></dxi-column>
-  <dxi-column dataField="Price" ></dxi-column>
-  <dxi-column dataField="CurrencyType" [width]="130"></dxi-column>
-
+  <dxi-column dataField="Price"></dxi-column>
+  <dxi-column dataField="CurrencyType" [width]="180"></dxi-column>
+  <!-- <dxi-column type="buttons">
+    <dxi-button text="My Command" hint="My Command" [onClick]="onSelectedProduct(dataSource)"></dxi-button>
+  </dxi-column> -->
 </dx-data-grid>
-<div class="selected-data">
-  <span class="caption">Selected Products:</span>
-  <span>
-    {{
-      grid.selectedRowKeys.length
-        ? (grid.instance.getSelectedRowsData() | stringifyProducts)
-        : "Any Product has been selected"
-    }}
-  </span>
+
+<div>
+
+  <form class="productAdd-form">
+    <dx-form [formData]="formData">
+      <dxi-item itemType="empty" [colSpan]="2"></dxi-item>
+      <dxi-item>
+        <dx-text-box valueChangeEvent="keyup" stylingMode="underlined" label="Product Name" labelMode="floating"
+          [(value)]="product">
+        </dx-text-box>
+
+        <dx-text-box valueChangeEvent="keyup" stylingMode="underlined" label="Stock" labelMode="floating"
+          [(value)]="stock">
+        </dx-text-box>
+
+        <dx-text-box valueChangeEvent="keyup" stylingMode="underlined" label="Price" labelMode="floating"
+          [(value)]="price">
+        </dx-text-box>
+
+        <dx-text-box valueChangeEvent="keyup" stylingMode="underlined" label="Currency Type" labelMode="floating"
+          [(value)]="currencyType">
+        </dx-text-box>
+      </dxi-item>
+    </dx-form>
+  </form>
+  <dx-button mat-flat-button type="default" stylingMode="contained" (onClick)="addProduct()" icon="save">
+
+  </dx-button>
 </div>
-
-<div id="events">
-  <div>
-    <div class="caption"> Fired events </div>
-    <dx-button id="clear" text="Clear" (onClick)="clearEvents()"></dx-button>
-  </div>
-  <ul>
-    <li *ngFor="let event of events">{{ event }}</li>
-  </ul>
-</div>
-
-
-<!-- <div id="productInfo" *ngIf="grid.selectedRowKeys.length">
-  <p class="productInfo">{{
-    grid.instance.getSelectedRowsData()[0].ProductName
-  }}</p>
-</div> -->
-

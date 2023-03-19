@@ -7,11 +7,12 @@ import { FooterModule, ResetPasswordFormModule, CreateAccountFormModule, ChangeP
 import { AuthService, ScreenService, AppInfoService } from './shared/services';
 import { UnauthenticatedContentModule } from './unauthenticated-content';
 import { AppRoutingModule } from './app-routing.module';
-import { DxButtonModule, DxDataGridModule, DxSelectBoxModule, DxTextBoxModule, DxValidatorModule } from 'devextreme-angular';
+import { DxButtonModule, DxDataGridModule, DxFormModule, DxListModule, DxSelectBoxModule, DxTextBoxModule, DxValidatorModule } from 'devextreme-angular';
 
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { HomeComponent } from './pages/home/home.component';
-import { ProductComponent, stringifyProductsPipe } from './shared/components/product/product.component';
+import { ProductComponent } from './shared/components/product/product.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -19,8 +20,7 @@ import { ProductComponent, stringifyProductsPipe } from './shared/components/pro
   declarations: [
     AppComponent,
     HomeComponent,
-    ProductComponent,
-    stringifyProductsPipe
+    ProductComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +39,10 @@ import { ProductComponent, stringifyProductsPipe } from './shared/components/pro
     DxValidatorModule,
     DxDataGridModule,
     DxSelectBoxModule,
+    DxListModule,
+    DxFormModule,
+    FormsModule,
+    ReactiveFormsModule
 
   ],
   providers: [
