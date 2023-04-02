@@ -1,4 +1,4 @@
-import { Component, Pipe, PipeTransform } from '@angular/core';
+import { Component, Injector, Pipe, PipeTransform, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Product, ProductService, } from '../../services/product.service';
 
@@ -10,40 +10,43 @@ import { Product, ProductService, } from '../../services/product.service';
 })
 
 export class ProductComponent {
-  dataSource: Product[];
-  product: any;
+
+  dataSource: any;
+  productName: any;
   stock: any;
   price: any;
   currencyType: any;
   jsonValue:any;
   currency: any;
-  productName:Product;
-  selectedProduct:Product[];
   formGroup: FormGroup;
   formData: any = {};
+
 
   constructor(private service: ProductService, private fb: FormBuilder) {
     this.formGroup = this.fb.group({
       productName: ['', Validators.required],
       stock: [''],
       price: [''],
-      currencyType: ['']
+      currencyType: [''],
+
     })
 
-    this.dataSource = service.getProducts();
+    this.dataSource = service.getProducts().subscribe(pro=>{this.dataSource=pro})
 
   }
 
   addProduct(){
+
     debugger
     let newData = new Product();
 
-    newData.ID = Math.floor(Math.random() * 85) + 16;
-    newData.ProductName = this.product;
+
+    newData.ProductName = this.productName;
     newData.Stock = this.stock;
     newData.Price = this.price;
     newData.CurrencyType = this.currencyType;
 
+    this.dataSource= this.service.addProducts(newData).subscribe(pro=>{this.dataSource=pro})
     this.dataSource.push(newData);
   }
 

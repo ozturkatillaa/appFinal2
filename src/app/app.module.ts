@@ -13,6 +13,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { HomeComponent } from './pages/home/home.component';
 import { ProductComponent } from './shared/components/product/product.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 
@@ -42,8 +43,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     DxListModule,
     DxFormModule,
     FormsModule,
-    ReactiveFormsModule
-
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
     AuthService,

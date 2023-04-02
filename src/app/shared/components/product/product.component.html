@@ -6,20 +6,18 @@
   <span>{{jsonValue}}</span>
 </div>
 <p class="text-with-space"></p>
-<dx-data-grid #grid id="gridContainer" [dataSource]="dataSource" keyExpr="ID" [allowColumnReordering]="true"
-  [showBorders]="true"  [hoverStateEnabled]="true">
+<dx-data-grid #grid id="gridContainer" [dataSource]="dataSource" keyExpr="id" [allowColumnReordering]="true"
+  [showBorders]="true"  [hoverStateEnabled]="true"  >
 
   <dxo-paging [enabled]="true"></dxo-paging>
   <dxo-editing mode="row" [allowUpdating]="true" [allowDeleting]="true">
   </dxo-editing>
   <dxo-header-filter [visible]="true"></dxo-header-filter>
-  <dxi-column dataField="ProductName" caption="Title"></dxi-column>
-  <dxi-column dataField="Stock"></dxi-column>
-  <dxi-column dataField="Price"></dxi-column>
-  <dxi-column dataField="CurrencyType" [width]="180"></dxi-column>
-  <!-- <dxi-column type="buttons">
-    <dxi-button text="My Command" hint="My Command" [onClick]="onSelectedProduct(dataSource)"></dxi-button>
-  </dxi-column> -->
+  <dxi-column dataField="id" caption="Title"></dxi-column>
+  <dxi-column dataField="productName" caption="Title"></dxi-column>
+  <dxi-column dataField="stock"></dxi-column>
+  <dxi-column dataField="price"></dxi-column>
+  <dxi-column dataField="currencyType" [width]="180"></dxi-column>
 </dx-data-grid>
 
 <div>
@@ -29,7 +27,7 @@
       <dxi-item itemType="empty" [colSpan]="2"></dxi-item>
       <dxi-item>
         <dx-text-box valueChangeEvent="keyup" stylingMode="underlined" label="Product Name" labelMode="floating"
-          [(value)]="product">
+          [(value)]="productName">
         </dx-text-box>
 
         <dx-text-box valueChangeEvent="keyup" stylingMode="underlined" label="Stock" labelMode="floating"
@@ -46,7 +44,6 @@
       </dxi-item>
     </dx-form>
   </form>
-  <dx-button mat-flat-button type="default" stylingMode="contained" (onClick)="addProduct()" icon="save">
-
+  <dx-button mat-flat-button type="default" stylingMode="contained" (onClick)="addProduct( )" icon="save">
   </dx-button>
 </div>
